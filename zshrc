@@ -86,8 +86,8 @@ source $ZSH/oh-my-zsh.sh
 # Display Stuff
 alias gs1="gsettings set org.gnome.desktop.interface scaling-factor 1 && killall -3 gnome-shell"
 alias gs2="gsettings set org.gnome.desktop.interface scaling-factor 2 && killall -3 gnome-shell"
-alias hdmi="xrandr --dpi 100 && xrandr --output HDMI1 --auto --output eDP1 --off && sed -i 's/Source Code Pro 20/Source Code Pro 12/g' ~/.config/terminator/config && sudo sed -i 's/device-scale-factor=2/device-scale-factor=1/g' /usr/share/applications/chromium.desktop"
-alias laptop="xrandr --dpi 190 && xrandr --output eDP1 --auto --output HDMI1 --off && sed -i 's/Source Code Pro 12/Source Code Pro 20/g' ~/.config/terminator/config && sudo sed -i 's/device-scale-factor=1/device-scale-factor=2/g' /usr/share/applications/chromium.desktop"
+alias hdmi="xrandr --output HDMI1 --auto --dpi 100 --output eDP1 --off && xrdb -merge ~/.singleDPI"
+alias laptop="xrandr --output eDP1 --auto --dpi 200 --output HDMI1 --off && xrdb -merge ~/.doubleDPI"
 
 # SSH & VPN
 alias osu="ssh jonesmck@access.engr.oregonstate.edu"

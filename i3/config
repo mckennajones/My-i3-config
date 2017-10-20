@@ -2,7 +2,7 @@
 # this file and re-run i3-config-wizard(1).
 
 # Modifier key
-set $mod Mod1
+set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -169,53 +169,54 @@ set $transparent	#00000000
 
 #			            BORDER		BACKGROUND	     TEXT		INDICATOR	CHILD_BORDER
 client.focused		    $white	 $black		$white	$white     	$white
-client.unfocused	    $black		     $black		$darkblack		$darkblack       	$black
+client.unfocused	    $darkwhite		     $black		$darkblack		$darkblack       	$black
 client.focused_inactive $black		     $black		$black		$black        	$black
 client.urgent	        $darkred	     $darkred	$black		$darkred	$darkred
 client.background	    $black
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-	status_command          i3blocks
-	i3bar_command i3bar
-	position top
-	strip_workspace_numbers yes
-	separator_symbol "|"
-	workspace_buttons yes
-	bindsym button4 nop
-	bindsym button5 nop
-	tray_padding 0
-	height 30
-	position                top
-	#font                    pango:SFNS Display Regular 10
-	colors {
-		statusline 		$white
-		background		$black
-		separator		$white
-	#                           BORDER		    BACKGROUND      TEXT
-		focused_workspace	$black 	$black	$white
-		inactive_workspace	$black	$black	$darkblack
-		active_workspace	$transparent	$transparent	$white
-		urgent_workspace	$darkred	    $darkred        $transparent
-		binding_mode		$darkred	    $darkred        $transparent
-	}
-}
+# bar {
+# 	status_command          i3blocks
+# 	i3bar_command i3bar
+# 	position top
+# 	strip_workspace_numbers yes
+# 	separator_symbol "|"
+# 	workspace_buttons yes
+# 	bindsym button4 nop
+# 	bindsym button5 nop
+# 	tray_padding 0
+# 	height 30
+# 	position                top
+# 	#font                    pango:SFNS Display Regular 10
+# 	colors {
+# 		statusline 		$white
+# 		background		$black
+# 		separator		$white
+# 	#                           BORDER		    BACKGROUND      TEXT
+# 		focused_workspace	$black 	$black	$white
+# 		inactive_workspace	$black	$black	$darkblack
+# 		active_workspace	$transparent	$transparent	$white
+# 		urgent_workspace	$darkred	    $darkred        $transparent
+# 		binding_mode		$darkred	    $darkred        $transparent
+# 	}
+# }
 #set workspaces
 set $workspace1 "1"
 set $workspace2 "2"
 set $workspace3 "3"
 
 #Lock Screen
-bindsym Mod4+l exec ~/.config/i3/lock.sh
+bindsym $mod+space+l exec ~/.config/i3/lock.sh
 
 # Suspend
 bindsym $mod+shift+s exec systemctl suspend
 
 # Remove window titles
-for_window [class="^.*"] border pixel 4
+for_window [class="^.*"] border pixel 2
+hide_edge_borders none
 
-gaps inner 0
-gaps outer 0
+gaps inner 7
+gaps outer 10
 
 # Gaps Toggle
 set $mode_gaps Gaps: (o) outer, (i) inner
@@ -270,7 +271,8 @@ mode "$mode_gaps_outer" {
 # Startup
 exec ~/.config/i3/screenSetup.sh
 exec redshift-gtk
-exec feh --bg-fill ~/Dropbox/Backgrounds/Yosemite-Color-Block.png
+exec feh --bg-fill ~/Dropbox/Backgrounds/peace.jpg
 exec --no-startup-id nm-applet
 exec dropbox
-exec_always compton -b
+exec_always compton -b --config ~/.config/compton.conf
+exec_always --no-startup-id $HOME/.config/i3/polybar.sh
